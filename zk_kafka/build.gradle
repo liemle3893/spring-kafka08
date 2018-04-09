@@ -1,0 +1,8 @@
+dependencies {
+    compile "org.springframework:spring-context:$springVersion"
+    // Kafka
+    compile("org.apache.kafka:kafka_$scalaVersion:$kafkaVersion") {
+        exclude group: 'log4j'
+        exclude group: 'org.slf4j'
+    }
+}

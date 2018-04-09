@@ -1,0 +1,63 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id "com.gorylenko.gradle-git-properties" version "1.4.17"
+}
+apply plugin: 'org.springframework.boot'
+apply plugin: 'java'
+repositories {
+    mavenCentral()
+    maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+    maven {
+        url "http://dev3.me.zing.vn/artifactory/libs-server-local/"
+    }
+}
+
+dependencies {
+    compile project(':zk_kafka')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    compile('org.springframework.boot:spring-boot-starter-jetty') {
+        exclude group: 'org.eclipse.jetty.websocket'
+    }
+    compile('org.springframework.boot:spring-boot-starter-aop')
+    // Connection Pool
+    compile('com.zaxxer:HikariCP')
+    compile('com.fasterxml.jackson.module:jackson-module-parameter-names')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+
+    compile 'com.google.code.gson:gson'
+    compileOnly('org.projectlombok:lombok')
+
+    // Utils dependencies
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+    // Java 8 Functional helper
+    compile 'org.jooq:jool:0.9.12'
+    compile group: 'io.vavr', name: 'vavr', version: '0.9.2'
+    compile(group: 'com.github.javafaker', name: 'javafaker', version: '0.14') {
+        exclude group: 'org.yaml'
+    }
+    // Test
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+}
+
+springBoot {
+    buildInfo()
+}
