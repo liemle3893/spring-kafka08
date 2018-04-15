@@ -1,7 +1,7 @@
 package kafka08.configuration;
 
-import com.sk.zk_kafka.producer.DefaultKafkaProducerFactory;
-import com.sk.zk_kafka.serde.IntegerSerde;
+import com.github.liemle3893.spring_kafka08.producer.DefaultKafkaProducerFactory;
+import com.github.liemle3893.spring_kafka08.serde.IntegerSerde;
 import kafka.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;

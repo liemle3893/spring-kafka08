@@ -1,9 +1,12 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-group = 'com.sk'
-version = '0.1.0'
-sourceCompatibility = 1.8
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.8.0"
+}
 
 allprojects {
     ext {
@@ -11,11 +14,68 @@ allprojects {
         kafkaVersion = "0.8.2.0"
         scalaVersion = "2.11"
     }
-    apply plugin: 'java-library'
-    apply plugin: 'idea'
-    apply plugin: 'eclipse'
-
     repositories {
-        mavenCentral()
+        jcenter()
     }
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+    apply plugin: 'java'
+}
+
+def deployArtifact = new Properties()
+deployArtifact.load(new FileInputStream("deploy.settings"))
+Properties bintrayProps = new Properties()
+File propFile = "${System.properties['user.home']}${File.separator}.gradle${File.separator}bintray.properties" as File
+bintrayProps.load(propFile.newDataInputStream())
+
+
+project('zk_kafka') {
+    apply plugin: 'com.jfrog.bintray'
+    apply plugin: 'maven'
+
+    publishing {
+        publications {
+            bintray(MavenPublication) {
+                from components.java
+                groupId deployArtifact.groupId
+                artifactId deployArtifact.id
+                version deployArtifact.version
+                artifact sourcesJar
+                artifact javadocJar
+            }
+        }
+    }
+
+    bintray {
+        user = bintrayProps.get("bintray.user")
+        key = bintrayProps.get("bintray.apikey")
+        publications = ['bintray']
+        pkg {
+            repo = 'Personal'
+            name = deployArtifact.name
+            userOrg = user
+            licenses = ['Apache-2.0']
+            vcsUrl = deployArtifact.gitUrl
+            publicDownloadNumbers = true
+            version {
+                name = deployArtifact.deployVersion
+            }
+        }
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives javadocJar
+        archives sourcesJar
+    }
+
 }

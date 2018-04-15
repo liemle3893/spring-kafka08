@@ -1,8 +1,8 @@
 package kafka08.controller;
 
 import com.github.javafaker.Faker;
-import com.sk.zk_kafka.producer.KafkaProducerFactory;
-import com.sk.zk_kafka.producer.ProducerWrapper;
+import com.github.liemle3893.spring_kafka08.producer.KafkaProducerFactory;
+import com.github.liemle3893.spring_kafka08.producer.ProducerWrapper;
 import kafka.producer.KeyedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

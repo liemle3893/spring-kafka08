@@ -1,8 +1,8 @@
 package kafka08.messaging.kafka.consumer;
 
-import com.sk.zk_kafka.annotation.KafkaHandler;
-import com.sk.zk_kafka.annotation.KafkaListener;
-import com.sk.zk_kafka.serde.IntegerSerde;
+import com.github.liemle3893.spring_kafka08.annotation.KafkaHandler;
+import com.github.liemle3893.spring_kafka08.annotation.KafkaListener;
+import com.github.liemle3893.spring_kafka08.serde.IntegerSerde;
 import kafka.message.MessageAndMetadata;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.StringDeserializer;

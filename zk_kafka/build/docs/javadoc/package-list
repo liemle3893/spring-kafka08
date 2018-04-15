@@ -1,0 +1,8 @@
+com.github.liemle3893.spring_kafka08
+com.github.liemle3893.spring_kafka08.annotation
+com.github.liemle3893.spring_kafka08.config
+com.github.liemle3893.spring_kafka08.core
+com.github.liemle3893.spring_kafka08.listener
+com.github.liemle3893.spring_kafka08.producer
+com.github.liemle3893.spring_kafka08.serde
+com.github.liemle3893.spring_kafka08.util
