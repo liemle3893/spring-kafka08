@@ -13,6 +13,24 @@ Spring Boot support Kafka 0.10 and above (my SB version it 1.5.8) and our ecosys
 
 ### How to use?
 
+#### Maven
+```xml
+<dependency>
+  <groupId>com.github.liemle3893</groupId>
+  <artifactId>spring-kafka08</artifactId>
+  <version>0.0.1</version>
+  <type>pom</type>
+</dependency>
+```
+
+#### Gradle
+
+```groovy
+compile 'com.github.liemle3893:spring-kafka08:0.0.1'
+```
+
+#### Code
+
 ```java
     @KafkaListener(
             topicPattern = "local.test_kafka08-\\d+",
