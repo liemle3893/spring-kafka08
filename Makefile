@@ -9,7 +9,7 @@ clean:
 	sh gradlew -q clean
 .PHONY: build
 build:
-	sh gradlew -q build -x check
+	sh gradlew -q assemble
 deploy: clean build
 	sh gradlew -q :zk_kafka:bintrayUpload --info
 analyze: clean

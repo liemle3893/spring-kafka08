@@ -1,7 +1,7 @@
 siteUrl = https://github.com/liemle3893/spring-kafka08
 gitUrl = https://github.com/liemle3893/spring-kafka08.git
-version = 0.0.1
+version = 0.1.0
 groupId = com.github.liemle3893
 id = spring-kafka08
 name = spring-kafka08
-deployVersion = 0.0.1
+deployVersion = 0.1.0
