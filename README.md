@@ -18,7 +18,7 @@ Spring Boot support Kafka 0.10 and above (my SB version it 1.5.8) and our ecosys
 <dependency>
   <groupId>com.github.liemle3893</groupId>
   <artifactId>spring-kafka08</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -26,22 +26,22 @@ Spring Boot support Kafka 0.10 and above (my SB version it 1.5.8) and our ecosys
 #### Gradle
 
 ```groovy
-compile 'com.github.liemle3893:spring-kafka08:0.0.1'
+compile 'com.github.liemle3893:spring-kafka08:0.1.0'
 ```
 
 #### Code
 
 ```java
     @KafkaListener(
-            topicPattern = "local.test_kafka08-\\d+",
-            groupId = "test",
+            topicPattern = "${app.kafka.test.topic_pattern}",
+            groupId = "${app.kafka.test.consumer.group_id}",
             threadNum = 1,
             errorHandler = "errorHandler",
             keyDecoder = IntegerSerde.class,
             valueDecoder = StringDeserializer.class
     )
     @KafkaListener(
-            topics = {"local.test_topic_1"}
+            topics = {"local.test_topic_1"},
             groupId = "test",
             threadNum = 1,
             errorHandler = "errorHandler",
