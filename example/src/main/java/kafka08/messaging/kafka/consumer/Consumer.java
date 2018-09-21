@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class Consumer {
 
     @KafkaListener(
-            topicPattern = "local.test_kafka08-\\d+",
-            groupId = "test",
+            topicPattern = "${app.kafka.test.topic_pattern}",
+            groupId = "${app.kafka.test.consumer.group_id}",
             threadNum = 1,
             errorHandler = "errorHandler",
             keyDecoder = IntegerSerde.class,

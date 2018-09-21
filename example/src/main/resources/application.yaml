@@ -1,3 +1,9 @@
 spring.kafka.kafka08.zk-connect: localhost:2181/kafka
 spring.kafka.kafka08.brokers: localhost:9092
 spring.kafka.kafka08.consumer.auto.offset.reset: largest
+
+app.kafka:
+  test:
+    topic_pattern: 'local.test_kafka08.\d+'
+    consumer:
+      group_id: test
