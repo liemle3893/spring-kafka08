@@ -12,36 +12,36 @@ import java.lang.annotation.*;
 @Repeatable(KafkaListeners.class)
 public @interface KafkaListener {
 
-    /**
-     * Topics that consumer will listen on.
-     *
-     * @return
-     */
-    String[] topics() default {};
+	/**
+	 * Topics that consumer will listen on.
+	 *
+	 * @return
+	 */
+	String[] topics() default {};
 
-    /**
-     * Use either {@link KafkaListener#topicPattern()} or {@link KafkaListener#topics()}.
-     * {@link KafkaListener#topicPattern()} will be used if both exists.
-     *
-     * @return
-     */
-    String topicPattern() default "";
+	/**
+	 * Use either {@link KafkaListener#topicPattern()} or {@link KafkaListener#topics()}.
+	 * {@link KafkaListener#topicPattern()} will be used if both exists.
+	 *
+	 * @return
+	 */
+	String topicPattern() default "";
 
-    /**
-     * Will handle the error.
-     *
-     * @return
-     */
-    String errorHandler() default "";
+	/**
+	 * Will handle the error.
+	 *
+	 * @return
+	 */
+	String errorHandler() default "";
 
-    String groupId() default "";
+	String groupId() default "";
 
-    int threadNum() default 1;
+	String threadNum() default "1";
 
-    String configBeanName() default KafkaListenerConfigUtils.KAFKA_LISTENER_GENERAL_CONFIGURATION;
+	String configBeanName() default KafkaListenerConfigUtils.KAFKA_LISTENER_GENERAL_CONFIGURATION;
 
-    Class<? extends Deserializer> keyDecoder() default ByteArrayDeserializer.class;
+	Class<? extends Deserializer> keyDecoder() default ByteArrayDeserializer.class;
 
-    Class<? extends Deserializer> valueDecoder() default ByteArrayDeserializer.class;
+	Class<? extends Deserializer> valueDecoder() default ByteArrayDeserializer.class;
 
 }

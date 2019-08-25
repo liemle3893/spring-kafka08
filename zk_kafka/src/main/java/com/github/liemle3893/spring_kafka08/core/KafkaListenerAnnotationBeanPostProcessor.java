@@ -143,10 +143,12 @@ public class KafkaListenerAnnotationBeanPostProcessor<K, V>
 					String rawGroupId = kafkaListener.groupId();
 					String topicPatternExpression = env.resolvePlaceholders(rawTopicPattern);
 					String groupIdExpression = env.resolvePlaceholders(rawGroupId);
+					String threadNum = env.resolvePlaceholders(kafkaListener.threadNum());
 					List<String> topics = Arrays.asList(kafkaListener.topics())
 							.stream()
 							.map(s -> env.resolvePlaceholders(s))
 							.map(s -> evaluateExpression(configurableListableBeanFactory, s))
+							.map(s -> String.valueOf(s))
 							.collect(Collectors.toList());
 
 					ConsumerEndpoint consumerEndpoint = new ConsumerEndpoint(
@@ -154,7 +156,7 @@ public class KafkaListenerAnnotationBeanPostProcessor<K, V>
 							evaluateExpression(configurableListableBeanFactory, topicPatternExpression), // rawTopicPattern
 							evaluateExpression(configurableListableBeanFactory, groupIdExpression), // groupId
 							kafkaListener.configBeanName(), // configBeanRef
-							kafkaListener.threadNum(), // threadNum
+							Integer.valueOf(evaluateExpression(configurableListableBeanFactory, threadNum)), // threadNum
 							methodToUse, // method
 							bean, // bean
 							errorHandler,
@@ -165,6 +167,7 @@ public class KafkaListenerAnnotationBeanPostProcessor<K, V>
 					consumerEndpoint.run();
 				} catch (Exception ex) {
 					log.error("Cannot init consumers: ", ex);
+					throw ex;
 				}
 			});
 		} catch (InstantiationException | IllegalAccessException ex) {
