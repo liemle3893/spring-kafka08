@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "spring.kafka.kafka08.consumer.auto.offset.reset",
+      "type": "java.lang.String",
+      "description": "largest or smallest."
+    },
+    {
+      "name": "spring.kafka.kafka08.brokers",
+      "type": "java.lang.String",
+      "description": "List of kafka brokers. Ex: localhost:9091, localhost:9092."
+    },
+    {
+      "name": "spring.kafka.kafka08.zk-connect",
+      "type": "java.lang.String",
+      "description": "Kafka path in zookeeper."
+    }
+  ]
+}
