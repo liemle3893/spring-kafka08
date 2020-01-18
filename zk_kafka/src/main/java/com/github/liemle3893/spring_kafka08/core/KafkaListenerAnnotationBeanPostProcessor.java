@@ -25,6 +25,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -164,10 +165,11 @@ public class KafkaListenerAnnotationBeanPostProcessor<K, V>
 							keyDecoder,
 							valueDecoder
 					);
-					consumerEndpoint.setBeanFactory(beanFactory);
-					if (clientId != null) {
+					if (!StringUtils.isEmpty(clientId)) {
 						consumerEndpoint.setClientId(clientId);
 					}
+					// setBeanFactory should be last method to call before run.
+					consumerEndpoint.setBeanFactory(beanFactory);
 					consumerEndpoint.run();
 				} catch (Exception ex) {
 					log.error("Cannot init consumers: ", ex);
