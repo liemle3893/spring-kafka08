@@ -150,6 +150,7 @@ public class KafkaListenerAnnotationBeanPostProcessor<K, V>
 							.map(s -> evaluateExpression(configurableListableBeanFactory, s))
 							.map(s -> String.valueOf(s))
 							.collect(Collectors.toList());
+					String clientId = env.resolvePlaceholders(kafkaListener.clientId());
 
 					ConsumerEndpoint consumerEndpoint = new ConsumerEndpoint(
 							topics,// topics
@@ -164,6 +165,9 @@ public class KafkaListenerAnnotationBeanPostProcessor<K, V>
 							valueDecoder
 					);
 					consumerEndpoint.setBeanFactory(beanFactory);
+					if (clientId != null) {
+						consumerEndpoint.setClientId(clientId);
+					}
 					consumerEndpoint.run();
 				} catch (Exception ex) {
 					log.error("Cannot init consumers: ", ex);

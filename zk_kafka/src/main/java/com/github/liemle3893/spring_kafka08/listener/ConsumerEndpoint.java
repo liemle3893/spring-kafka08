@@ -39,6 +39,7 @@ public class ConsumerEndpoint implements SmartInitializingSingleton, KafkaListen
 	private final Object bean;
 	private final Deserializer valueDeserializer;
 	private final Deserializer keyDeserializer;
+	private String clientId;
 
 	private final GenericErrorHandler errorHandler;
 
@@ -66,6 +67,9 @@ public class ConsumerEndpoint implements SmartInitializingSingleton, KafkaListen
 		Properties props = new Properties();
 		props.putAll(configs);
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+		if (clientId != null) {
+			props.put(ConsumerConfig.CLIENT_ID_CONFIG, clientId);
+		}
 		return new kafka.consumer.ConsumerConfig(props);
 	}
 
@@ -165,4 +169,10 @@ public class ConsumerEndpoint implements SmartInitializingSingleton, KafkaListen
 			return delegate.deserialize(null, bytes);
 		}
 	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+
 }

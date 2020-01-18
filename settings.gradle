@@ -18,6 +18,4 @@ include 'services:webservice'
 rootProject.name = 'Kafka 0.8 using Zookeeper'
 include 'example'
 include 'zk_kafka'
-include ':spring-kafka08'
-project(':spring-kafka08').projectDir = new File('zk_kafka')
 

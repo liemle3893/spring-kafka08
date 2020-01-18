@@ -36,6 +36,8 @@ public @interface KafkaListener {
 
 	String groupId() default "";
 
+	String clientId() default "";
+
 	String threadNum() default "1";
 
 	String configBeanName() default KafkaListenerConfigUtils.KAFKA_LISTENER_GENERAL_CONFIGURATION;
@@ -43,5 +45,6 @@ public @interface KafkaListener {
 	Class<? extends Deserializer> keyDecoder() default ByteArrayDeserializer.class;
 
 	Class<? extends Deserializer> valueDecoder() default ByteArrayDeserializer.class;
+
 
 }
