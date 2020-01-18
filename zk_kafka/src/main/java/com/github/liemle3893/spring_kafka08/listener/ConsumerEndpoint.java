@@ -68,7 +68,7 @@ public class ConsumerEndpoint implements SmartInitializingSingleton, KafkaListen
 		props.putAll(configs);
 		props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 		if (clientId != null) {
-			props.put(ConsumerConfig.CLIENT_ID_CONFIG, clientId);
+			props.put("consumer.id", clientId);
 		}
 		return new kafka.consumer.ConsumerConfig(props);
 	}
